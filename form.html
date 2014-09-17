@@ -1,0 +1,352 @@
+<!doctype html>
+<head>
+  <meta charset="utf-8">
+  <title>Java Script</title>
+</head>
+
+<body>
+
+
+<form id="payment" method="post">
+	<fieldset>
+		<legend>Your details</legend>
+		<ol>
+			<li>
+				<label for=name>Name</label>
+				<input id=name name=name type=text placeholder="First and last name" required autofocus>
+			</li>
+			<li>
+				<label for=email>Email</label>
+				<input id=email name=email type=email placeholder="example@domain.com" required>
+			</li>
+			<li>
+				<label for=phone>Phone</label>
+				<input id=phone name=phone type=tel placeholder="Eg. +447500000000" required>
+			</li>
+		</ol>
+	</fieldset>
+	<fieldset>
+		<legend>Delivery address</legend>
+		<ol>
+			<li>
+				<label for=address>Address</label>
+				<textarea id=address name=address rows=5 required></textarea>
+			</li>
+			<li>
+				<label for=postcode>Post code</label>
+				<input id=postcode name=postcode type=text placeholder="Eg. 13905" required
+                                  pattern="^\d{5}(-\d{4})?$" >
+			</li>
+			<li>
+				<label for=country>Country</label>
+				<input id=country name=country placeholder="Eg. USA" type=text required>
+			</li>
+		</ol>
+	</fieldset>
+	<fieldset>
+		<legend>Card details</legend>
+		<ol>		
+			<li>
+				<fieldset>
+					<legend>Card type</legend>
+					<ol>
+						<li>
+							<input id=visa name=cardtype type=radio checked>
+							<label for=visa>VISA</label>
+						</li>
+						<li>
+							<input id=amex name=cardtype type=radio>
+							<label for=amex>AmEx</label>
+						</li>
+						<li>
+							<input id=mastercard name=cardtype type=radio>
+							<label for=mastercard>Mastercard</label>
+						</li>
+					</ol>
+				</fieldset>
+			</li>
+			<li>
+				<label for=cardnumber>Card number</label>
+				<input id=cardnumber name=cardnumber type=number placeholder="Eg. 1234123412341234" required>
+			</li>
+			<li>
+				<label for=secure>Security code</label>
+				<input id=secure name=secure type=number placeholder="Eg. 123" required>
+			</li>
+			<li>
+				<label for=namecard>Name on card</label>
+				<input id=namecard name=namecard type=text placeholder="Exact name as on the card" required>
+			</li>
+		</ol>
+	</fieldset>
+	
+	
+	
+	
+	<fieldset>
+		<button type="submit" onClick="return check()" >Buy it!</button>
+	</fieldset>
+</form>
+
+
+<div id="path">
+</div>
+
+
+
+
+
+<script type="text/javascript">
+
+
+   
+function check()
+	{
+			var varnameflag=checkName(document.getElementById("name").value);
+			
+			if(varnameflag==false)
+			{
+					alert("Please enter a valid Name of length greater than 2. Name can only contain alphabets and white space");
+					document.getElementById("name").select();
+					document.getElementById("name").focus();
+					return false;
+			}
+			
+			var varName = /^[a-zA-Z\s]*$/;
+			if(!(varName.test(document.getElementById("name").value)))
+			{
+				alert("Please enter a valid Name of length greater than 2. Name can only contain alphabets and white spaces");
+				document.getElementById("country").select();
+				document.getElementById("country").focus();
+				return false;
+			}
+			
+			var varemail=checkEmail(document.getElementById("email").value);
+			if(varemail==false)
+			{
+					alert("Please enter a valid email!, Eg: abc@abc.com");
+					document.getElementById("email").select();
+					document.getElementById("email").focus();
+					return false;
+			}
+			
+			var varPhone=checkPhone(document.getElementById("phone").value);
+			if(varPhone==false)
+			{
+					alert("Please enter a valid phone number!, phone number has to be + sign followed by 12 digits, Eg: +123412341234");
+					document.getElementById("phone").select();
+					document.getElementById("phone").focus();
+					return false;
+			}
+			
+			var varAddress=checkAddress(document.getElementById("address").value);
+			if(varAddress==false)
+			{
+					alert("Please enter a valid address. Address can only contain alphabets and white space");
+					document.getElementById("address").select();
+					document.getElementById("address").focus();
+					return false;
+			}
+			
+			var varAddress = /^$/;
+			if(varAddress.test(document.getElementById("address").value))
+			{
+				alert("Please enter a valid Address. Address cannot be blank");
+				document.getElementById("address").select();
+				document.getElementById("address").focus();
+				return false;
+			}
+			
+			var varPostCode = /^\d{5}$/;
+			if(!(varPostCode.test(document.getElementById("postcode").value)))
+			{
+				alert("Please enter a valid Post Code. Eg: 12345");
+				document.getElementById("postcode").select();
+				document.getElementById("postcode").focus();
+				return false;
+			}
+			
+			
+			var varCountryflag=checkCountry(document.getElementById("country").value);
+			
+			if(varCountryflag==false)
+			{
+					alert("Please enter a valid country. country can only contain alphabets and white spaces");
+					document.getElementById("country").select();
+					document.getElementById("country").focus();
+					return false;
+			}
+			
+			
+			var varCountry = /^[a-zA-Z\s]*$/;
+			if(!(varCountry.test(document.getElementById("country").value)))
+			{
+				alert("Please enter a valid Country, Country can only contain alphabets and white spaces");
+				document.getElementById("country").select();
+				document.getElementById("country").focus();
+				return false;
+			}
+			
+			var varCardNumber = /^\d{16}$/;
+			if(!(varCardNumber.test(document.getElementById("cardnumber").value)))
+			{
+				alert("Please enter a valid Card Number. Valid card number consist of 16 digits");
+				document.getElementById("cardnumber").select();
+				document.getElementById("cardnumber").focus();
+				return false;
+			}
+			
+			var varSecure = /^\d{3}$/;
+			if(!(varSecure.test(document.getElementById("secure").value)))
+			{
+				alert("Please enter a valid secure pin. Valid Secure pin consist of 3 digits");
+				document.getElementById("secure").select();
+				document.getElementById("secure").focus();
+				return false;
+			}
+			
+			
+			var varnameflag=checkName(document.getElementById("namecard").value);
+			
+			if(varnameflag==false)
+			{
+					alert("Please enter a valid Name of length greater than 2. Name can only contain alphabets and white space");
+					document.getElementById("namecard").select();
+					document.getElementById("namecard").focus();
+					return false;
+			}
+			
+			
+			var varNameCard = /^[a-zA-Z\s]*$/;
+			if(!(varNameCard.test(document.getElementById("namecard").value)))
+			{
+				alert("Please enter a valid Name on Card, Name can only contain alphabets and white spaces");
+				document.getElementById("namecard").select();
+				document.getElementById("namecard").focus();
+				return false;
+			}
+			
+			display();
+			
+			return false;
+			
+	}
+	
+
+	
+function display()
+	{
+		//var display=document.getElementById("name").value;
+		//path.innerHTML=display;
+		//return false;	
+		
+		/*path.innerHTML= "Name :" + document.getElementById("name").value + "<br /> Name :" + document.getElementById("name").value +  "<br /> Name :" +  document.getElementById("name").value + "<br /> Name :" + document.getElementById("name").value;
+		return false;*/
+		
+		var cardType = "";
+		if(document.getElementById("visa").checked)
+		{
+			cardType = "visa";
+		}
+		else if(document.getElementById("amex").checked)
+		{
+			cardType = "amex";
+		}
+		else if(document.getElementById("mastercard").checked)
+		{
+			cardType = "mastercard";
+		}
+		
+		path.innerHTML= "Name :" + document.getElementById("name").value + 
+		"<br /> Email :" + document.getElementById("email").value +  
+		"<br /> Phone :" +  document.getElementById("phone").value + 
+		"<br /> Address :" +  document.getElementById("address").value + 
+		"<br /> Post Code :" +  document.getElementById("postcode").value + 
+		"<br /> Country :" +  document.getElementById("country").value + 
+		"<br /> Card Type :" +  cardType + 
+		"<br /> Card Number :" + document.getElementById("cardnumber").value + 
+		"<br /> Secure Number:" +  document.getElementById("secure").value + 
+		"<br /> Name on Card :" +  document.getElementById("namecard").value;
+		
+		return false;
+	}
+
+
+
+/* function for checking name is a string with minimum 3 characters */
+function checkName(username)
+{
+		if((isFinite(username))){
+				return false;
+		}
+		if( username.length>2){
+				return true;
+		}
+		else
+		{
+				return false;
+		}
+}
+
+function checkAddress(address)
+{
+		if((isFinite(address))){
+				return false;
+		}
+		if( address.length>1){
+				return true;
+		}
+		else
+		{
+				return false;
+		}
+}
+
+function checkCountry(country)
+{
+		if((isFinite(country))){
+				return false;
+		}
+		if( country.length>1){
+				return true;
+		}
+		else
+		{
+				return false;
+		}
+}
+
+function checkEmail(email) 
+{ 
+		var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		return re.test(email);
+}
+
+function checkPhone(phone) 
+{ 
+		var re = /^\+[0-9]{12}$/;
+		return re.test(phone);
+}
+
+
+/* function for checking age is number betbeen 1 and 100  */
+function checkAge(age)
+{
+		if(!(isFinite(age))){  // not isFinite
+				return false;
+		}
+		iage=parseInt(age);
+		if((iage>0) && (iage <=100))
+		{
+				return true;
+		}
+		else
+		{
+				return false;
+		}
+}
+
+
+</script>
+</body>
+</html>
